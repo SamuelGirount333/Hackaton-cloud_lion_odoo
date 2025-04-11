@@ -8,16 +8,15 @@ class clinic_clinical_record(models.Model):
 
     patient_id = fields.Many2one("clinic_patient", string="Relacion con paciente")
     employee_id = fields.Many2one("clinic_employee_profile", string="Responsable")
-    
     record_date = fields.Date(string="Fecha de apertura", default=fields.Date.today, required=True)
-    attention_type = fields.selection(
-        selection=[
+    
+    attention_type = fields.Selection(selection=[
             ("consultation", "Consulta Externa"),
             ("surgery", "Cirugia"),
             ("emergency", "Urgencias")
         ], string="Tipo de Atencion medica", required=True)
-    status = fields.selection(
-        selection=[
+    
+    status = fields.Selection(selection=[
             ("in_progess", "En Proceso"),
             ("finished", "Finalizada"),
             ("canceled", "Cancelada")
@@ -40,4 +39,4 @@ class clinic_clinical_record(models.Model):
     def _check_recor_date(self):
         for record in self:
             if record.record_date > fields.Date.today():
-                raise ValidationError("La fecha de apertura no puede contener datos futuros ")
+                raise ValidationError("La fecha de apertura no puede contener datos futuros.")

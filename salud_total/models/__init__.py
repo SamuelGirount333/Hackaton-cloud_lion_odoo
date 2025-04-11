@@ -1,9 +1,12 @@
-# -*- coding: utf-8 -*-
-
-from . import clinic_patient 
+from . import clinic_patient
 from . import clinic_clinical_record
 from . import clinic_employee_profile
 from . import clinic_appointment
-from . import clinic_medical_consult
 from . import clinic_nursing_filter
+from . import clinic_medical_consult
 from . import clinic_surgery_preparation
+from . import clinic_surgery_procedure
+from . import clinic_billing
+from . import clinic_medical_test
+from . import clinic_inventory
+from . import clinic_room_assignment

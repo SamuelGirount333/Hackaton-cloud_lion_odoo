@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import api, models, fields
 from odoo.exceptions import ValidationError
 
 class clinic_surgery_preparation(models.Model):
@@ -7,27 +7,13 @@ class clinic_surgery_preparation(models.Model):
     _order = 'scheduled_date desc'
 
     name = fields.Char(string='Código', required=True, readonly=True, copy=False,
-        default=lambda self: self.env['ir.sequence'].next_by_code('clinic_surgery_preparation')
-    )
+        default=lambda self: self.env['ir.sequence'].next_by_code('clinic_surgery_preparation'))
 
-    patient_id = fields.Many2one(
-        'clinic_patient',
-        string='Paciente',
-        required=True
-    )
+    patient_id = fields.Many2one('clinic_patient', string='Paciente', required=True)
+    doctor_id = fields.Many2one('clinic_employee_profile', string='Cirujano Responsable', required=True, domain="[('is_doctor','=',True)]")
+    scheduled_date = fields.Datetime(string='Fecha Programada', required=True)
 
-    doctor_id = fields.Many2one(
-        'clinic_employee_profile',
-        string='Cirujano Responsable',
-        required=True
-    )
-
-    scheduled_date = fields.Datetime(
-        string='Fecha Programada',
-        required=True
-    )
-
-    surgery_type = fields.Selection([
+    surgery_type = fields.Selection(selection=[
         ('cardiaca', 'Cirugía Cardíaca'),
         ('ortopedica', 'Cirugía Ortopédica'),
         ('neuro', 'Neurocirugía'),
@@ -44,7 +30,7 @@ class clinic_surgery_preparation(models.Model):
     consent_signed = fields.Boolean(string='Consentimiento Firmado', default=False)
     signature = fields.Binary(string='Firma de Consentimiento')
     
-    state = fields.Selection([
+    state = fields.Selection(selection=[
         ('draft', 'Borrador'),
         ('prepared', 'Preparado'),
         ('cancelled', 'Cancelado'),

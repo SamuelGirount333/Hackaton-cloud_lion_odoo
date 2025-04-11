@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <menuitem id="clinic_menu_root" name="Clínica"/>
+
+    <menuitem id="clinic_menu_appointment"
+    name="Citas Médicas"
+    parent="clinic_menu_root"
+    sequence="10"/>
+
+    <menuitem id="clinic_menu_appointment_manage"
+    name="Gestionar Citas"
+    parent="clinic_menu_appointment"
+    action="action_clinic_appointment"
+    sequence="1"/>
+</odoo>

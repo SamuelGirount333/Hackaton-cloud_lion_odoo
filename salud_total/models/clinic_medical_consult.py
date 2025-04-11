@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import api, models, fields
 from odoo.exceptions import ValidationError
 
 class clinic_medical_consult(models.Model):
@@ -9,17 +9,9 @@ class clinic_medical_consult(models.Model):
     name = fields.Char(string='Código', required=True, readonly=True, copy=False, 
                     default=lambda self: self.env['ir.sequence'].next_by_code('clinic_medical_consult'))
     
-    patient_id = fields.Many2one('clinic_patient', 
-                                string='Paciente', 
-                                required=True)
-    
-    doctor_id = fields.Many2one('clinic_employee_profile', 
-                                string='Doctor(a)',
-                                required=True)
-    
-    appointment_id = fields.Many2one('clinic_appointment', 
-                                    string='Cita médica', 
-                                    required=True)
+    patient_id = fields.Many2one('clinic_patient', string='Paciente', required=True)    
+    doctor_id = fields.Many2one('clinic_employee_profile', string='Doctor(a)',required=True, domain="[('is_doctor','=',True)]")    
+    appointment_id = fields.Many2one('clinic_appointment', string='Cita médica', required=True)
     
     consultation_date = fields.Datetime(string='Fecha de consulta', default=fields.Datetime.now, required=True)
     symptoms = fields.Text(string='Síntomas')
@@ -27,7 +19,7 @@ class clinic_medical_consult(models.Model):
     treatment = fields.Text(string='Tratamiento')
     observations = fields.Text(string='Observaciones')
 
-    state = fields.Selection([
+    state = fields.Selection(selection=[
         ('draft', 'Borrador'),
         ('in_consultation', 'En Consulta'),
         ('done', 'Finalizada'),

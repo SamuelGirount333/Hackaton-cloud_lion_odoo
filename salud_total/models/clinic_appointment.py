@@ -12,7 +12,8 @@ class clinic_appointment(models.Model):
     doctor_id = fields.Many2one('clinic_employee_profile', string='Médico', required=True, domain="[('is_doctor','=',True)]")
     appointment_date = fields.Datetime(string='Fecha y hora de la cita', required=True)
     notes = fields.Text(string='Notas')
-    state = fields.Selection([
+    
+    state = fields.Selection(selection=[
         ('draft', 'Borrador'),
         ('scheduled', 'Programada'),
         ('done', 'Realizada'),
@@ -20,7 +21,8 @@ class clinic_appointment(models.Model):
     ], string='Estado', default='draft', tracking=True)
 
     duration = fields.Float(string='Duración estimada (horas)', default=1.0)
-    priority = fields.Selection([
+    
+    priority = fields.Selection(selection=[
         ('0', 'Baja'),
         ('1', 'Normal'),
         ('2', 'Alta'),

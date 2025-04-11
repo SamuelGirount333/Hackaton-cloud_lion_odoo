@@ -6,11 +6,7 @@ class clinic_nursing_filter(models.Model):
     _description = 'Filtro de Enfermería'
     _order = 'appointment_id'
 
-    appointment_id = fields.Many2one(
-        'clinic_appointment',
-        string='Cita médica',
-        required=True
-    )
+    appointment_id = fields.Many2one('clinic_appointment', string='Cita médica',required=True)
     
     blood_pressure = fields.Char(string='Presión arterial') 
     heart_rate = fields.Integer(string='Frecuencia cardíaca (lpm)')
