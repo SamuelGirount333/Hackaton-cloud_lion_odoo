@@ -13,7 +13,7 @@ class clinic_surgery_procedure(models.Model):
     surgery_preparation_id = fields.Many2one('clinic_surgery_preparation', string='Preparación Quirúrgica Relacionada', required=True)
     surgery_date = fields.Datetime(string='Fecha de la Cirugía', default=fields.Datetime.now, required=True)
 
-    voiz_note_description = fields.Text(string='Texto por voz')
+    description = fields.Text(string='Descripción del procedimiento')
 
     result = fields.Text(string='Resultado')
 
