@@ -21,16 +21,23 @@
     'depends': ['base'],
 
     # always loaded
-    'data': [
-    'security/clinic_security.xml',
-    'security/ir.model.access.csv',
-    'views/clinic_patient_views.xml',
-    'views/clinic_record_views.xml',
-    'views/clinic_employee_views.xml',
-    'views/clinic_medical_consult_views.xml'
-    #'views/clinic_appointment_views.xml',
-    #'views/clinic_menus.xml',
-    ],
+        'data': [
+        'security/clinic_security.xml',
+        'security/ir.model.access.csv',
+        'views/clinic_appointment_view.xml',
+        'views/clinic_billing_views.xml',
+        'views/clinic_clinical_record_views.xml',
+        'views/clinic_employee_profile_views.xml',
+        'views/clinic_inventory_views.xml',
+        'views/clinic_medical_consult_views.xml',
+        'views/clinic_medical_test_views.xml',
+        'views/clinic_nursing_filter_views.xml',
+        'views/clinic_room_assignment_views.xml',
+        'views/clinic_surgery_preparation_view.xml',
+        'views/clinic_surgery_procedure_view.xml',
+        'views/clinic_patient_view.xml',
+        'views/clinic_menus.xml'
+        ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
