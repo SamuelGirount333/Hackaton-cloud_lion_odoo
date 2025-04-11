@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="salud_total.list">
+      <field name="name">salud_total list</field>
+      <field name="model">salud_total.salud_total</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </list>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="salud_total.action_window">
+      <field name="name">salud_total window</field>
+      <field name="res_model">salud_total.salud_total</field>
+      <field name="view_mode">list,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="salud_total.action_server">
+      <field name="name">salud_total server</field>
+      <field name="model_id" ref="model_salud_total_salud_total"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "list,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="salud_total" id="salud_total.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="salud_total.menu_1" parent="salud_total.menu_root"/>
+    <menuitem name="Menu 2" id="salud_total.menu_2" parent="salud_total.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="salud_total.menu_1_list" parent="salud_total.menu_1"
+              action="salud_total.action_window"/>
+    <menuitem name="Server to list" id="salud_total" parent="salud_total.menu_2"
+              action="salud_total.action_server"/>
+-->
+  </data>
+</odoo>
