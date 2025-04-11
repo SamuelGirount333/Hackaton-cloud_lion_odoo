@@ -1,0 +1,76 @@
+<odoo>
+    <record id="view_clinic_surgery_preparation_list" model="ir.ui.view">
+        <field name="name">clinic.surgery.preparation.list</field>
+        <field name="model">clinic_surgery_preparation</field>
+        <field name="arch" type="xml">
+            <list string="Preparaciones Quirúrgicas">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="scheduled_date"/>
+                <field name="surgery_type"/>
+                <field name="fasting_required"/>
+                <field name="consent_signed"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_clinic_surgery_preparation_form" model="ir.ui.view">
+        <field name="name">clinic.surgery.preparation.form</field>
+        <field name="model">clinic_surgery_preparation</field>
+        <field name="arch" type="xml">
+            <form string="Preparación para Cirugía">
+                <header>
+                    <button name="action_consent_" type="object" string="Validar Consentimiento"
+                            modifiers='{"invisible": [["state", "!=", "draft"]]}'/>
+                    <button name="action_prepare" type="object" string="Preparar"
+                            modifiers='{"invisible": [["state", "!=", "draft"]]}'/>
+                    <button name="action_cancel" type="object" string="Cancelar"
+                            modifiers='{"invisible": [["state", "!=", "draft"]]}'/>
+                    <field name="state" widget="statusbar"
+                           options='{"statusbar_visible": ["draft", "prepared", "cancelled"]}'/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="patient_id"/>
+                        <field name="doctor_id"/>
+                        <field name="scheduled_date"/>
+                        <field name="surgery_type"/>
+                    </group>
+                    <group>
+                        <field name="fasting_required"/>
+                        <field name="fasting_hours"
+                               modifiers='{"invisible": [["fasting_required", "=", false]]}'/>
+                    </group>
+                    <group>
+                        <field name="allergies"/>
+                        <field name="medications"/>
+                        <field name="observations"/>
+                    </group>
+                    <group>
+                        <field name="consent_signed"/>
+                        <field name="signature"
+                               widget="image"
+                               options='{"preview_image": "signature"}'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_clinic_surgery_preparation" model="ir.actions.act_window">
+        <field name="name">Preparaciones Quirúrgicas</field>
+        <field name="res_model">clinic_surgery_preparation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_clinic_surgery_root" name="Cirugías" sequence="90"/>
+    
+    <menuitem id="menu_clinic_surgery_preparation"
+              name="Preparaciones"
+              parent="menu_clinic_surgery_root"
+              action="action_clinic_surgery_preparation"/>
+</odoo>

@@ -6,15 +6,14 @@ class clinic_surgery_procedure(models.Model):
     _description = 'Procedimiento Quirúrgico'
     _order = 'surgery_date desc'
 
-    name = fields.Char(string='Código de Procedimiento', required=True, readonly=True, copy=False,
-        default=lambda self: self.env['ir.sequence'].next_by_code('clinic_surgery_procedure'))
+    name = fields.Char(string='Código de Procedimiento', required=True, copy=False)
 
     patient_id = fields.Many2one('clinic_patient', string='Paciente', required=True)
     doctor_id = fields.Many2one('clinic_employee_profile', string='Cirujano(a)', required=True, domain=[('is_doctor', '=', True)])
     surgery_preparation_id = fields.Many2one('clinic_surgery_preparation', string='Preparación Quirúrgica Relacionada', required=True)
     surgery_date = fields.Datetime(string='Fecha de la Cirugía', default=fields.Datetime.now, required=True)
 
-    description = fields.Text(string='Descripción del procedimiento')
+    voiz_note_description = fields.Text(string='Texto por voz')
 
     result = fields.Text(string='Resultado')
 

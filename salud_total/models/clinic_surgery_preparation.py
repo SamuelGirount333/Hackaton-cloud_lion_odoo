@@ -6,8 +6,7 @@ class clinic_surgery_preparation(models.Model):
     _description = 'Preparación para Cirugía'
     _order = 'scheduled_date desc'
 
-    name = fields.Char(string='Código', required=True, readonly=True, copy=False,
-        default=lambda self: self.env['ir.sequence'].next_by_code('clinic_surgery_preparation'))
+    name = fields.Char(string='Código', required=True, copy=False)
 
     patient_id = fields.Many2one('clinic_patient', string='Paciente', required=True)
     doctor_id = fields.Many2one('clinic_employee_profile', string='Cirujano Responsable', required=True, domain="[('is_doctor','=',True)]")

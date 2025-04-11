@@ -6,8 +6,7 @@ class clinic_medical_consult(models.Model):
     _description = 'Consulta Médica'
     _order = 'consultation_date desc'
 
-    name = fields.Char(string='Código', required=True, readonly=True, copy=False, 
-                    default=lambda self: self.env['ir.sequence'].next_by_code('clinic_medical_consult'))
+    name = fields.Char(string='Código', required=True, copy=False)
     
     patient_id = fields.Many2one('clinic_patient', string='Paciente', required=True)    
     doctor_id = fields.Many2one('clinic_employee_profile', string='Doctor(a)',required=True, domain="[('is_doctor','=',True)]")    

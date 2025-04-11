@@ -1,0 +1,61 @@
+<odoo>
+    <record id="view_clinic_surgery_procedure_list" model="ir.ui.view">
+        <field name="name">clinic.surgery.procedure.list</field>
+        <field name="model">clinic_surgery_procedure</field>
+        <field name="arch" type="xml">
+            <list string="Procedimientos Quirúrgicos">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="surgery_preparation_id"/>
+                <field name="surgery_date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_clinic_surgery_procedure_form" model="ir.ui.view">
+        <field name="name">clinic.surgery.procedure.form</field>
+        <field name="model">clinic_surgery_procedure</field>
+        <field name="arch" type="xml">
+            <form string="Procedimiento Quirúrgico">
+                <header>
+                    <button name="action_start" type="object" string="Iniciar"
+                            modifiers='{"invisible": [["state", "!=", "draft"]]}'/>
+                    <button name="action_done" type="object" string="Finalizar"
+                            modifiers='{"invisible": [["state", "!=", "in_progress"]]}'/>
+                    <button name="action_cancel" type="object" string="Cancelar"
+                            modifiers='{"invisible": [["state", "!=", "draft"]]}'/>
+                    <field name="state" widget="statusbar"
+                           options='{"statusbar_visible": ["draft", "in_progress", "done", "cancelled"]}'/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="patient_id"/>
+                        <field name="doctor_id"/>
+                        <field name="surgery_preparation_id"/>
+                        <field name="surgery_date"/>
+                    </group>
+
+                    <group>
+                        <field name="description" placeholder="Describe el procedimiento realizado..."/>
+                        <field name="result" placeholder="Describe los resultados del procedimiento..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_clinic_surgery_procedure" model="ir.actions.act_window">
+        <field name="name">Procedimientos Quirúrgicos</field>
+        <field name="res_model">clinic_surgery_procedure</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_clinic_surgery_procedure"
+              name="Procedimientos"
+              parent="menu_clinic_surgery_root"
+              action="action_clinic_surgery_procedure"/>
+</odoo>

@@ -1,0 +1,60 @@
+<odoo>
+    <record id="view_clinic_medical_consult_list" model="ir.ui.view">
+        <field name="name">clinic.medical.consult.list</field>
+        <field name="model">clinic_medical_consult</field>
+        <field name="arch" type="xml">
+            <list string="Consultas Médicas">
+                <field name="name"/>
+                <field name="consultation_date"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_clinic_medical_consult_form" model="ir.ui.view">
+        <field name="name">clinic.medical.consult.form</field>
+        <field name="model">clinic_medical_consult</field>
+        <field name="arch" type="xml">
+            <form string="Consulta Médica">
+                <header>
+                    <button name="action_start_consultation" type="object" string="Iniciar" modifiers="{'invisible': [['state', '!=', 'draft']]}"/>
+                    <button name="action_done" type="object" string="Finalizar" modifiers="{'invisible': [['state', '!=', 'in_consultation']]}"/>
+                    <button name="action_cancel" type="object" string="Cancelar" class="btn-secondary" modifiers="{'invisible': [['state', '!=', 'draft']]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_consultation,done,cancelled"/>
+                </header>
+                <group>
+                    <field name="name"/>
+                    <field name="consultation_date"/>
+                    <field name="patient_id"/>
+                    <field name="doctor_id"/>
+                    <field name="appointment_id"/>
+                </group>
+                <notebook>
+                    <page string="Síntomas y Diagnóstico">
+                        <field name="symptoms"/>
+                        <field name="diagnosis"/>
+                    </page>
+                    <page string="Tratamiento y Observaciones">
+                        <field name="treatment"/>
+                        <field name="observations"/>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_clinic_medical_consult" model="ir.actions.act_window">
+        <field name="name">Consultas Médicas</field>
+        <field name="res_model">clinic_medical_consult</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_clinic_medical_consult_root" name="Consultas" sequence="50"/>
+
+    <menuitem id="menu_clinic_medical_consult"
+              name="Consultas Médicas"
+              parent="menu_clinic_medical_consult_root"
+              action="action_clinic_medical_consult"/>
+</odoo>

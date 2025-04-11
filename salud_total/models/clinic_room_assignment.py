@@ -6,8 +6,7 @@ class clinic_room_assignment(models.Model):
     _description = 'Asignación de Habitación'
     _order = 'assignment_date desc'
 
-    name = fields.Char(string='Código', required=True, readonly=True, copy=False,
-                        default=lambda self: self.env['ir.sequence'].next_by_code('clinic_room_assignment'))
+    name = fields.Char(string='Código', required=True, copy=False)
 
     patient_id = fields.Many2one('clinic_patient', string='Paciente', required=True)
     room_number = fields.Char(string='Número de Habitación', required=True)

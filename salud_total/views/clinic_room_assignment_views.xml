@@ -1,0 +1,60 @@
+<odoo>
+    <record id="view_clinic_room_assignment_list" model="ir.ui.view">
+        <field name="name">clinic.room.assignment.list</field>
+        <field name="model">clinic_room_assignment</field>
+        <field name="arch" type="xml">
+            <list string="Asignaciones de Habitación">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="room_number"/>
+                <field name="assignment_date"/>
+                <field name="release_date"/>
+                <field name="is_active"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_clinic_room_assignment_form" model="ir.ui.view">
+        <field name="name">clinic.room.assignment.form</field>
+        <field name="model">clinic_room_assignment</field>
+        <field name="arch" type="xml">
+            <form string="Asignación de Habitación">
+                <header>
+                    <button name="action_release" type="object" string="Liberar"
+                            modifiers='{"invisible": [["state", "!=", "assigned"]]}'/>
+                    <button name="action_cancel" type="object" string="Cancelar"
+                            modifiers='{"invisible": [["state", "!=", "assigned"]]}'/>
+                    <field name="state" widget="statusbar"
+                           options='{"statusbar_visible": ["assigned", "released", "cancelled"]}'/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="patient_id"/>
+                        <field name="room_number"/>
+                    </group>
+                    <group>
+                        <field name="assignment_date"/>
+                        <field name="release_date"/>
+                        <field name="is_active" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_clinic_room_assignment" model="ir.actions.act_window">
+        <field name="name">Asignaciones de Habitación</field>
+        <field name="res_model">clinic_room_assignment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_clinic_room_root" name="Habitaciones" sequence="80"/>
+
+    <menuitem id="menu_clinic_room_assignment"
+              name="Asignaciones"
+              parent="menu_clinic_room_root"
+              action="action_clinic_room_assignment"/>
+</odoo>

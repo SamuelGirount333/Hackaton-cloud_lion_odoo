@@ -1,0 +1,76 @@
+<odoo>
+    <record id="view_clinic_patient_list" model="ir.ui.view">
+        <field name="name">clinic.patient.list</field>
+        <field name="model">clinic_patient</field>
+        <field name="arch" type="xml">
+            <list string="Pacientes">
+                <field name="name"/>
+                <field name="identificacion"/>
+                <field name="birth_date"/>
+                <field name="age"/>
+                <field name="sex"/>
+                <field name="phone"/>
+                <field name="email"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_clinic_patient_form" model="ir.ui.view">
+        <field name="name">clinic.patient.form</field>
+        <field name="model">clinic_patient</field>
+        <field name="arch" type="xml">
+            <form string="Ficha del Paciente">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="identificacion"/>
+                            <field name="birth_date"/>
+                            <field name="age" readonly="1"/>
+                            <field name="sex"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="address"/>
+                            <field name="eps"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- <page string="Historial Clínico">
+                            <field name="history">
+                                <list string="Historia Clínica">
+                                    <field name="date"/>
+                                    <field name="doctor_id"/>
+                                    <field name="summary"/>
+                                </list>
+                            </field>
+                        </page> -->
+
+                        <page string="Condiciones Médicas">
+                            <group>
+                                <field name="alergies"/>
+                                <field name="previus_condition"/>
+                                <field name="depend_medicine"/>
+                                <!-- <field name="type_medicine" attrs="{'invisible': [('depend_medicine','=',False)]}"/> -->
+                                <field name="type_medicine" modifiers='{"invisible": [["state", "=", "done"]]}'/>
+                                
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_clinic_patient" model="ir.actions.act_window">
+        <field name="name">Pacientes</field>
+        <field name="res_model">clinic_patient</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="clinic_root_menu" name="Clínica"/>
+    <menuitem id="clinic_patient_menu" name="Pacientes" parent="clinic_root_menu"/>
+    <menuitem id="clinic_patient_submenu" name="Gestión de Pacientes" parent="clinic_patient_menu" action="action_clinic_patient"/>
+</odoo>

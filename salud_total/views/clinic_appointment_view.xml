@@ -13,9 +13,9 @@
                         <field name="appointment_date"/>
                         <field name="state" readonly="1"/>
                     </group>
-                    <group>
+                    <!-- <group>
                         <field name="reason"/>
-                    </group>
+                    </group> -->
                 </sheet>
             </form>
         </field>
@@ -38,8 +38,5 @@
         <field name="name">Citas</field>
         <field name="res_model">clinic_appointment</field>
         <field name="view_mode">list,form</field>
-        <field name="help" type="html">
-            <p>Gestione las citas médicas registradas.</p>
-        </field>
     </record>
 </odoo>

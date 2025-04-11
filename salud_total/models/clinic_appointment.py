@@ -5,9 +5,8 @@ class clinic_appointment(models.Model):
     _name = 'clinic_appointment'
     _description = 'Citas médicas'
     _order = 'appointment_date desc'
-    
-    name = fields.Char(string='Referencia', required=True, copy=False, readonly=True,
-    default=lambda self: self.env['ir.sequence'].next_by_code('clinic_appointment'))
+
+    name = fields.Char(string='Referencia', required=True, copy=False)
     patient_id = fields.Many2one('clinic_patient', string='Paciente', required=True, ondelete='restrict')
     doctor_id = fields.Many2one('clinic_employee_profile', string='Médico', required=True, domain="[('is_doctor','=',True)]")
     appointment_date = fields.Datetime(string='Fecha y hora de la cita', required=True)
@@ -18,7 +17,7 @@ class clinic_appointment(models.Model):
         ('scheduled', 'Programada'),
         ('done', 'Realizada'),
         ('cancelled', 'Cancelada')
-    ], string='Estado', default='draft', tracking=True)
+    ], string='Estado', default='draft')
 
     duration = fields.Float(string='Duración estimada (horas)', default=1.0)
     

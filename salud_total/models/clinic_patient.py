@@ -8,8 +8,8 @@ class clinic_patient(models.Model):
 
     name = fields.Char(string="Nombre completo del paciente", required=True)
     identificacion = fields.Integer(string="Identificacion del paciente", required=True)
-    birth_date = fields.Date(string="Fecha de Nacimiento", compute="_compute_age", required=True)
-    age = fields.Integer(string="Edad", compute="_compute_age", store=True)
+    birth_date = fields.Date(string="Fecha de Nacimiento", required=True)
+    age = fields.Integer(string="Edad", compute="_compute_age", required=True)
     
     sex = fields.Selection(selection=[
             ("male", "Masculino"),
@@ -33,3 +33,6 @@ class clinic_patient(models.Model):
                 record.age = today.year - record.birth_date.year - (
                     (today.month, today.day) < (record.birth_date.month, record.birth_date.day)
                 )
+            else:
+                record.age = 0
+                

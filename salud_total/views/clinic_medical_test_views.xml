@@ -1,0 +1,56 @@
+<odoo>
+    <record id="view_clinic_medical_test_list" model="ir.ui.view">
+        <field name="name">clinic.medical.test.list</field>
+        <field name="model">clinic_medical_test</field>
+        <field name="arch" type="xml">
+            <list string="Exámenes Médicos">
+                <field name="name"/>
+                <field name="request_date"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="test_type"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_clinic_medical_test_form" model="ir.ui.view">
+        <field name="name">clinic.medical.test.form</field>
+        <field name="model">clinic_medical_test</field>
+        <field name="arch" type="xml">
+            <form string="Examen Médico">
+                <header>
+                    <button name="action_process" type="object" string="Procesar" class="btn-primary" modifiers="{'invisible': [['state', '!=', 'requested']]}"/>
+                    <button name="action_complete" type="object" string="Completar" class="btn-success" modifiers="{'invisible': [['state', '!=', 'in_process']]}"/>
+                    <button name="action_cancel" type="object" string="Cancelar" class="btn-secondary" modifiers="{'invisible': [['state', '!=', 'requested']]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="requested,in_process,completed,cancelled"/>
+                </header>
+                <group>
+                    <field name="name"/>
+                    <field name="request_date"/>
+                    <field name="patient_id"/>
+                    <field name="doctor_id"/>
+                    <field name="test_type"/>
+                    <field name="description"/>
+                </group>
+                <group>
+                    <field name="result_date"/>
+                    <field name="result"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_clinic_medical_test" model="ir.actions.act_window">
+        <field name="name">Exámenes Médicos</field>
+        <field name="res_model">clinic_medical_test</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_clinic_medical_test_root" name="Exámenes" sequence="60"/>
+
+    <menuitem id="menu_clinic_medical_test"
+              name="Exámenes Médicos"
+              parent="menu_clinic_medical_test_root"
+              action="action_clinic_medical_test"/>
+</odoo>

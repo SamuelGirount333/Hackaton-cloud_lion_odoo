@@ -1,15 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <odoo>
-    <data noupdate="1">
+    <!-- Categoría del módulo para organizar permisos -->
+    <record id="module_category_clinic" model="ir.module.category">
+        <field name="name">Gestión Clínica</field>
+        <field name="description">Permisos y grupos para el módulo de clínica</field>
+        <field name="sequence">10</field>
+    </record>
 
-        <record id="group_clinic_user" model="res.groups">
-            <field name="name">Usuario Clínica</field>
-            <field name="category_id" ref="base.module_category_human_resources"/>
-        </record>
+    <!-- Grupos de usuarios -->
+    <record id="group_clinic_user" model="res.groups">
+        <field name="name">Usuario Clínico</field>
+        <field name="category_id" ref="salud_total.module_category_clinic"/>
+    </record>
 
-        <record id="group_clinic_admin" model="res.groups">
-            <field name="name">Administrador Clínica</field>
-            <field name="category_id" ref="base.module_category_human_resources"/>
-        </record>
-
-    </data>
+    <record id="group_clinic_manager" model="res.groups">
+        <field name="name">Manager Clínico</field>
+        <field name="category_id" ref="salud_total.module_category_clinic"/>
+    </record>
 </odoo>

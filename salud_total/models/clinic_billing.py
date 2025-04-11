@@ -6,8 +6,7 @@ class clinic_billing(models.Model):
     _description = 'Facturación Clínica'
     _order = 'billing_date desc'
 
-    name = fields.Char(string='Factura N°', required=True, readonly=True, copy=False,
-                        default=lambda self: self.env['ir.sequence'].next_by_code('clinic.billing'))
+    name = fields.Char(string='Factura N°', required=True, copy=False,)
     """
 <odoo>
     <data noupdate="1">
